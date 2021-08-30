@@ -5,10 +5,6 @@ require("PHPMailer-master/src/PHPMailer.php");
 require("PHPMailer-master/src/SMTP.php");
 require("PHPMailer-master/src/Exception.php");
 
-
-//Load Composer's autoloader
-//require 'vendor/autoload.php';
-
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -24,15 +20,15 @@ $mail = new PHPMailer\PHPMailer\PHPMailer();
     );                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'khalid1996ksaa@gmail.com';                     //SMTP username
-    $mail->Password   = 'KHalid@18';                               //SMTP password
+    $mail->Username   = '';                     //SMTP username
+    $mail->Password   = '';                               //SMTP password
     $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     echo $mail->Username;
 
     //Recipients
-    $mail->setFrom('khalid1996ksaa@gmail.com', 'Mailer');
+    $mail->setFrom('', 'Mailer');
     $mail->addAddress($email, $name);     //Add a recipient
     //
     //Content
@@ -47,10 +43,5 @@ $mail = new PHPMailer\PHPMailer\PHPMailer();
      } else {
         echo "Message has been sent";
      }
-
-
-
-
-
 
 ?>
