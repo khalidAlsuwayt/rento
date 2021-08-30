@@ -2,7 +2,7 @@
 
 Rento is a website where you can offer and rent Items from one account, no need to have two accounts.
 
-for live demo you can click on this link: 
+for live demo you can click on this link: http://rento123.infinityfreeapp.com/rento/
 
 for the database you can download the sql file and import it to your DBMS.
 
