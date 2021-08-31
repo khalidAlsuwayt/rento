@@ -1,0 +1,201 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item`
+--
+
+CREATE TABLE `item` (
+  `id` int(15) UNSIGNED NOT NULL,
+  `userId` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `description` text COLLATE utf8mb4_bin NOT NULL,
+  `price` int(11) NOT NULL,
+  `category` varchar(50) COLLATE utf8mb4_bin NOT NULL,
+  `picture` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `lat` float(10,6) DEFAULT NULL,
+  `lng` float(10,6) DEFAULT NULL,
+  `isAvailable` tinyint(4) NOT NULL,
+  `availableUntil` date DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`id`, `userId`, `name`, `description`, `price`, `category`, `picture`, `lat`, `lng`, `isAvailable`, `availableUntil`, `created_at`) VALUES
+(17, 9, 'Football', 'Premier league Football, clean and new.\r\nit hasn\'t been used much.', 10, 'sport', '1629797678football.jpg', 26.404472, 50.097305, 0, '0000-00-00', '2021-08-24 12:34:38'),
+(18, 9, 'American Football', 'American Football Made from leather and in a good condition with hand sewed stiches.', 15, 'sport', '1629797826american football.jpg', 26.404472, 50.097305, 0, '0000-00-00', '2021-08-24 12:37:06'),
+(19, 9, 'tennis racket', 'one tennis racket in a good condition.\r\nmust return it in a good condition.', 20, 'sport', '1629798196tennis racket.jpg', 26.404472, 50.097305, 1, '0000-00-00', '2021-08-24 12:43:16'),
+(20, 11, 'Chair', 'Very Comfortable Chair', 20, 'furniture', '1629798266chair.jpg', 26.404472, 50.097305, 1, '0000-00-00', '2021-08-24 12:44:26'),
+(21, 11, '4 Chairs', 'Very Comfortable 4 Chairs', 30, 'furniture', '1629798304chairs.jpg', 26.404472, 50.097305, 1, '0000-00-00', '2021-08-24 12:45:04'),
+(22, 11, 'ping pong table', 'ping pong table', 80, 'sport', '1629798340ping pong table.jpg', 26.404472, 50.097305, 1, '0000-00-00', '2021-08-24 12:45:40'),
+(24, 17, 'Camera', 'Digital Camera', 40, 'electro', '163024908738873c20-a2d6-11eb-8f76-872d6dab64df.cf.jpg', 26.404472, 50.097305, 1, NULL, '2021-08-29 17:58:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `itemList`
+--
+
+CREATE TABLE `itemList` (
+  `id` int(15) NOT NULL,
+  `itemId` int(15) UNSIGNED NOT NULL,
+  `sellerId` int(11) UNSIGNED NOT NULL,
+  `sellerName` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `buyerId` int(11) UNSIGNED DEFAULT NULL,
+  `buyerName` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `state` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `fromDate` date DEFAULT NULL,
+  `toDate` date DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `itemList`
+--
+
+INSERT INTO `itemList` (`id`, `itemId`, `sellerId`, `sellerName`, `buyerId`, `buyerName`, `state`, `fromDate`, `toDate`, `created_at`) VALUES
+(13, 17, 9, 'khalid khalid', NULL, NULL, 'draft', NULL, NULL, '2021-08-24 12:34:38'),
+(14, 18, 9, 'khalid khalid', NULL, NULL, 'draft', NULL, NULL, '2021-08-24 12:37:06'),
+(15, 19, 9, 'khalid khalid', 11, 'Ali', 'accept', '2021-08-27', '2021-08-30', '2021-08-24 12:43:16'),
+(16, 20, 11, 'Ali', NULL, NULL, 'offer', NULL, NULL, '2021-08-24 12:44:26'),
+(17, 21, 11, 'Ali', 17, 'khalid khalid', 'finish', '2021-08-26', '2021-08-28', '2021-08-24 12:45:04'),
+(18, 22, 11, 'Ali', 9, 'khalid khalid', 'rentRequest', '2021-08-31', '2021-09-08', '2021-08-24 12:45:40'),
+(20, 24, 17, 'khalid khalid', NULL, NULL, 'offer', NULL, NULL, '2021-08-29 17:58:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE `rating` (
+  `id` int(20) UNSIGNED NOT NULL,
+  `sellerId` int(11) UNSIGNED NOT NULL,
+  `sellerName` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `buyerId` int(11) UNSIGNED NOT NULL,
+  `buyerName` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `score` int(1) NOT NULL,
+  `comment` text COLLATE utf8mb4_bin,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`id`, `sellerId`, `sellerName`, `buyerId`, `buyerName`, `score`, `comment`, `created_at`) VALUES
+(1, 11, NULL, 17, 'khalid khalid', 1, 'Bad Person', '2021-08-30 15:10:02'),
+(2, 11, NULL, 17, 'khalid khalid', 4, 'Great Person', '2021-08-30 15:12:02'),
+(3, 11, NULL, 17, 'khalid khalid', 5, 'Very Clean Item', '2021-08-30 15:10:02'),
+(4, 9, NULL, 11, 'Ali', 4, 'Items same as the description', '2021-08-30 15:10:02'),
+(5, 9, NULL, 11, 'Ali', 5, 'Great Renter', '2021-08-30 15:10:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `role` enum('admin','user','blocked','unactive') COLLATE utf8mb4_bin NOT NULL DEFAULT 'user',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `token` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `isActive` tinyint(4) DEFAULT '0',
+  `expiryDate` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `token`, `isActive`, `expiryDate`) VALUES
+(9, 'khalid', 'kahlid@k.com', '123456', 'user', '2021-08-18 11:18:29', '', 1, '0000-00-00 00:00:00'),
+(11, 'Ali', 'Ali@gmail.com', '123456', 'user', '2021-08-23 13:15:30', '', 1, '0000-00-00 00:00:00'),
+(17, 'khalid salem', 'khalid18187@gmail.com', '123456', 'user', '2021-08-29 15:25:59', '8622278e1512c294eef3d5fc5fbcf304', 1, NULL),
+(18, 'Badr', 'khalid.alsuwayt@gmail.com', '123456', 'user', '2021-08-31 06:34:17', 'bda3583d12cf385ba4150a7ff06d7ba0', 1, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_userId` (`userId`);
+
+--
+-- Indexes for table `itemList`
+--
+ALTER TABLE `itemList`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `itemId` (`itemId`),
+  ADD KEY `itemList_sellerId` (`sellerId`),
+  ADD KEY `itemList_buyerId` (`buyerId`);
+
+--
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rating_sellerId` (`sellerId`),
+  ADD KEY `rating_buyerId` (`buyerId`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `itemList`
+--
+ALTER TABLE `itemList`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
